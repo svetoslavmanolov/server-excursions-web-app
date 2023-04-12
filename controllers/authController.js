@@ -1,10 +1,13 @@
 const router = require('express').Router();
+const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
+dotenv.config();
+
 
 const authService = require('../services/authService');
 const { COOKIE_SESSION_NAME } = require('../constants');
 const { getErrorMessage } = require('../utils/errorHelpers');
-const { SECRET } = require('../config/env');
+const SECRET = process.env.SECRET;
 const { isAuth, isGuest } = require('../middlewares/authMiddleware');
 
 router.post('/register', isGuest, async (req, res) => {
@@ -18,7 +21,7 @@ router.post('/register', isGuest, async (req, res) => {
         const payload = { _id: user._id, username: user.username };
         const token = jwt.sign(payload, SECRET, { expiresIn: '1d' });
         // res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
-        res.cookie('token', token, { httpOnly: false })
+        res.cookie('token', token, { httpOnly: true })
         res.status(200).json({ user: { _id: user._id, email: user.email, username: user.username } })
     } catch (error) {
         res.status(400).json({ error: getErrorMessage(error) });
@@ -34,7 +37,7 @@ router.post('/login', isGuest, async (req, res) => {
         // const token = jwt.sign(payload, SECRET, { expiresIn: '1d' });
         const token = await authService.createToken(user);
 
-        res.cookie('token', token, { httpOnly: true })
+        res.cookie('token', token, { httpOnly: false })
         res.status(200).json({ user: { _id: user._id, email: user.email, username: user.username } })
     } catch (error) {
         res.status(400).json({ error: getErrorMessage(error) });

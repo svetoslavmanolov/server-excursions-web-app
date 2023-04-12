@@ -1,11 +1,9 @@
 const router = require('express').Router();
 
-const homeController = require('./controllers/homeController');
 const authController = require('./controllers/authController');
 const excursionController = require('./controllers/excursionController');
 const commentController = require('./controllers/commentController');
 
-router.use(homeController);
 router.use('/auth', authController);
 router.use('/excursions', excursionController);
 router.use('/comments', commentController);

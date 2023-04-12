@@ -2,24 +2,22 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const dotenv = require('dotenv');
 const whitelist = ['http://localhost:3000']
 
-const { PORT } = require('./config/env');
 const routes = require('./routes');
 const { dbInit } = require('./config/db');
 const { auth } = require('./middlewares/authMiddleware');
 const { errorHandler } = require('./middlewares/errorHandlerMiddleware');
 
+// const Excursion = require('./models/Excursion');
+// const {user} = require('./utils/data');
+
+dotenv.config();
 const app = express();
+const PORT = process.env.PORT;
 
-// app.engine('hbs', hbs.engine({
-//     extname: 'hbs'
-// }));
 
-// app.set('view engine', 'hbs');
-
-// app.set('view engine', 'html');
-// app.use(express.static('public'));
 app.use(cors({ origin: whitelist, credentials: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -29,5 +27,5 @@ app.use(routes);
 app.use(errorHandler);
 
 dbInit();
-//.then()
+// Excursion.insertMany(user);
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

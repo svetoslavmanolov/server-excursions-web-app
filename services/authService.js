@@ -1,8 +1,11 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
 
-const { SECRET } = require('../config/env');
+dotenv.config();
+
+const SECRET = process.env.SECRET;
 
 exports.create = ({ email, username, password }) => User.create({ email, username, password });
 
