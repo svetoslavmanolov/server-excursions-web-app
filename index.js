@@ -17,11 +17,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
-// app.engine('hbs', hbs.engine({
-//     extname: 'hbs'
-// }));
+app.engine('hbs', hbs.engine({
+    extname: 'hbs'
+}));
 
-// app.set('view engine', 'hbs');
+app.set('view engine', 'hbs');
 
 // app.use(cors({ origin: whitelist, credentials: true }));
 app.use(cors({ origin: '*', credentials: true }));
