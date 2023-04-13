@@ -15,7 +15,7 @@ const { errorHandler } = require('./middlewares/errorHandlerMiddleware');
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3005;
+const port = process.env.PORT || 3005;
 
 // app.engine('hbs', hbs.engine({
 //     extname: 'hbs'
@@ -34,4 +34,4 @@ app.use(errorHandler);
 
 dbInit();
 // Excursion.insertMany(user);
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(port, () => console.log(`Server is running on port ${port}`));

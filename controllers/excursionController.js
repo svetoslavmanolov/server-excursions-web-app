@@ -35,7 +35,6 @@ router.get('/', async (req, res) => {
 
 router.get('/:excursionId/details', async (req, res) => {
     const excursion = await excursionService.getOneDetailed(req.params.excursionId).lean();  //tuk sme populate-nali author, no ne i usersShared, s koito move da si raboti kato masiv ot ObjectId-ta i veche ako iskame i te da sa popalneni kato imena i obekti trqbva da gi populate-nem i tqh
-    // res.render('toy/details', { ...toy, isOwner, isBought })
     // res.json({ ...excursion, isOwner, isBought });
     // const bookedUsers = excursion.listOfUsersBooked.map(x => x.username).join(', ');
     // console.log(bookedUsers);
