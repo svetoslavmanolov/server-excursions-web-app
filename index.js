@@ -25,7 +25,7 @@ const port = process.env.PORT || 3005;
 
 // app.use(cors({ origin: whitelist, credentials: true }));
 // app.use(cors({ 'Access-Control-Allow-Origin': '*', credentials: true }));
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
